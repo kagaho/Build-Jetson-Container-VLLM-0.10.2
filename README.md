@@ -82,23 +82,6 @@ or
 
 $ docker run -d --name vllm_0_10_2 -it --gpus all -p 8001:8000 -v $HOME/.cache/huggingface:/root/.cache/huggingface vllm:r38.2.aarch64-cu130-24.04-vllm
 
-
-docker 
-```
-Namespace(packages=['vllm'], prefer=['local', 'registry', 'build'], disable=[''], user='dustynv', output='/tmp/autotag', quiet=False, verbose=False)
--- L4T_VERSION=38.2.0  JETPACK_VERSION=7.0  CUDA_VERSION=13.0
--- Finding compatible container image for ['vllm']
-vllm:r38.2.aarch64-cu130-24.04-vllm
-V4L2_DEVICES: 
-### ARM64 architecture detected
-### Jetson Detected
-SYSTEM_ARCH=tegra-aarch64
-+ docker run --runtime nvidia --env NVIDIA_DRIVER_CAPABILITIES=compute,utility,graphics -it --rm --network host --shm-size=8g --volume /tmp/argus_socket:/tmp/argus_socket --volume /etc/enctune.conf:/etc/enctune.conf --volume /etc/nv_tegra_release:/etc/nv_tegra_release --volume /tmp/nv_jetson_model:/tmp/nv_jetson_model --volume /var/run/dbus:/var/run/dbus --volume /var/run/avahi-daemon/socket:/var/run/avahi-daemon/socket --volume /var/run/docker.sock:/var/run/docker.sock --volume /home/rteixeira/Documents/jetson-containers/data:/data -v /etc/localtime:/etc/localtime:ro -v /etc/timezone:/etc/timezone:ro --device /dev/snd -e PULSE_SERVER=unix:/run/user/1000/pulse/native -v /run/user/1000/pulse:/run/user/1000/pulse --device /dev/bus/usb --device /dev/i2c-0 --device /dev/i2c-1 --device /dev/i2c-2 --device /dev/i2c-3 --device /dev/i2c-4 --device /dev/i2c-5 --device /dev/i2c-6 --device /dev/i2c-7 --device /dev/i2c-8 --device /dev/i2c-9 -v /run/jtop.sock:/run/jtop.sock -d --name vllm -p 8001:8000 vllm:r38.2.aarch64-cu130-24.04-vllm
-WARNING: Published ports are discarded when using host network mode
-e5fc1794d0707c6bbce93fba19ac6cd4e2ed1233a0b71f9c6c380a7d71f18ce8
-```
-
-
 docker exec -it vllm bash (check version 0.10.2)
 ```
 # vllm --version
