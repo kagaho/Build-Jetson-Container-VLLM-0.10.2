@@ -95,8 +95,7 @@ INFO 09-21 23:01:33 [__init__.py:241] Automatically detected platform cuda.
 
 #### Test any model (following commands inside the containe):
 
-
-root@8cc52f8c9b13:/# huggingface-cli login
+/# huggingface-cli login
 ```
 ⚠️  Warning: 'huggingface-cli login' is deprecated. Use 'hf auth login' instead.
 
@@ -117,7 +116,7 @@ The current active token is: `blabla`
 ```
 
 
-root@8cc52f8c9b13:/# vllm serve meta-llama/Llama-3.1-8B-Instruct   --host 0.0.0.0 --port 8000   --enforce-eager --gpu-memory-utilization 0.85
+/# vllm serve meta-llama/Llama-3.1-8B-Instruct   --host 0.0.0.0 --port 8000   --enforce-eager --gpu-memory-utilization 0.85
 ```
 /opt/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   import pynvml  # type: ignore[import]
