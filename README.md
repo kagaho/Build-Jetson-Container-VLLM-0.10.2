@@ -79,7 +79,7 @@ vllm                          r38.2.aarch64-cu130-24.04-pip_cache_cu130      c9d
 ubuntu                        24.04                                          f4158f3f9981   11 days ago         101MB
 ```
 
-Create the container:
+- Create the container:
 
 $ jetson-containers run -d --name vllm -p 8001:8000 $(autotag vllm)
 
@@ -87,7 +87,8 @@ or
 
 $ docker run -d --name vllm_0_10_2 -it --gpus all -p 8001:8000 -v $HOME/.cache/huggingface:/root/.cache/huggingface vllm:r38.2.aarch64-cu130-24.04-vllm
 
-docker exec -it vllm bash (check version 0.10.2)
+
+$ docker exec -it vllm bash (check version 0.10.2)
 ```
 # vllm --version
 /opt/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
@@ -225,7 +226,7 @@ Loading safetensors checkpoint shards: 100% Completed | 4/4 [00:04<00:00,  1.22s
 ```
 
 
-Testing:
+#### Testing:
 
 ```bash
 curl http://localhost:8001/v1/completions \
