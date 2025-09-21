@@ -1,6 +1,6 @@
 ## How to Build Jetson Conainer latest VLLM 0.10.2 on Jetson Thor 
 
-    - Follow below the simplified and unofficial installation path to get vLLM 0.10.2 on Jetson using Dusty’s jetson-containers (which can build/pull an aarch64 image for JetPack).
+- Follow below the simplified and unofficial installation path to get vLLM 0.10.2 on Jetson using Dusty’s jetson-containers (which can build/pull an aarch64 image for JetPack).
 
 ```
 git clone https://github.com/dusty-nv/jetson-containers
@@ -18,14 +18,14 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-    - Install the jetson-containers helper scripts (autotag, run, build) and set up defaults for your JetPack/CUDA stack. 
+- Install the jetson-containers helper scripts (autotag, run, build) and set up defaults for your JetPack/CUDA stack. 
   
     ./install.sh
 
     VLLM_VERSION=0.10.2 jetson-containers build vllm
 
 
-    - This installation will take around 70 minutes, where all container images are created:
+- This installation will take around 70 minutes, where all container images are created:
 
 
 $ docker images
