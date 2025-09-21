@@ -6,7 +6,7 @@ Follow below the simplified and unofficial installation path to get vLLM 0.10.2 
 git clone https://github.com/dusty-nv/jetson-containers
 cd jetson-containers/
 ```
-```
+```python
 sudo apt install -y python3-venv
 python3 -m venv ~/jc-venv
 source ~/jc-venv/bin/activate
