@@ -1,4 +1,4 @@
-## How to Build Jetson Conainer 0.10.2, required for running on Jetson Thor New Hugging Face Models
+## How to Build Jetson Conainer latest VLLM 0.10.2 on Jetson Thor 
 
 Follow below the simplified and unofficial installation path to get vLLM 0.10.2 on Jetson using Dusty’s jetson-containers (which can build/pull an aarch64 image for JetPack).
 
@@ -102,6 +102,99 @@ docker exec -it vllm bash (check version 0.10.2)
 INFO 09-21 23:01:33 [__init__.py:241] Automatically detected platform cuda.
 0.10.2+cu130
 ```
+
+Test any model:
+
+
+root@thor:/# vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0 \
+  --host 0.0.0.0 --port 8000 \
+  --enforce-eager --gpu-memory-utilization 0.85
+```
+/opt/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+/opt/venv/lib/python3.12/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+INFO 09-21 23:16:02 [__init__.py:241] Automatically detected platform cuda.
+(APIServer pid=291) INFO 09-21 23:16:04 [api_server.py:1882] vLLM API server version 0.10.2
+(APIServer pid=291) INFO 09-21 23:16:04 [utils.py:328] non-default args: {'model_tag': 'TinyLlama/TinyLlama-1.1B-Chat-v1.0', 'host': '0.0.0.0', 'model': 'TinyLlama/TinyLlama-1.1B-Chat-v1.0', 'enforce_eager': True, 'gpu_memory_utilization': 0.85}
+(APIServer pid=291) INFO 09-21 23:16:12 [__init__.py:745] Resolved architecture: LlamaForCausalLM
+(APIServer pid=291) `torch_dtype` is deprecated! Use `dtype` instead!
+(APIServer pid=291) INFO 09-21 23:16:12 [__init__.py:1778] Using max model len 2048
+(APIServer pid=291) INFO 09-21 23:16:13 [scheduler.py:222] Chunked prefill is enabled with max_num_batched_tokens=2048.
+(APIServer pid=291) INFO 09-21 23:16:13 [__init__.py:3643] Cudagraph is disabled under eager mode
+/opt/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+/opt/venv/lib/python3.12/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+INFO 09-21 23:16:17 [__init__.py:241] Automatically detected platform cuda.
+(EngineCore_0 pid=357) INFO 09-21 23:16:19 [core.py:648] Waiting for init message from front-end.
+(EngineCore_0 pid=357) INFO 09-21 23:16:19 [core.py:75] Initializing a V1 LLM engine (v0.10.2) with config: model='TinyLlama/TinyLlama-1.1B-Chat-v1.0', speculative_config=None, tokenizer='TinyLlama/TinyLlama-1.1B-Chat-v1.0', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, override_neuron_config={}, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=2048, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=True, kv_cache_dtype=auto, device_config=cuda, decoding_config=DecodingConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_backend=''), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=0, served_model_name=TinyLlama/TinyLlama-1.1B-Chat-v1.0, enable_prefix_caching=True, chunked_prefill_enabled=True, use_async_output_proc=True, pooler_config=None, compilation_config={"level":0,"debug_dump_path":"","cache_dir":"","backend":"","custom_ops":[],"splitting_ops":null,"use_inductor":true,"compile_sizes":[],"inductor_compile_config":{"enable_auto_functionalized_v2":false},"inductor_passes":{},"cudagraph_mode":0,"use_cudagraph":true,"cudagraph_num_of_warmups":0,"cudagraph_capture_sizes":[],"cudagraph_copy_inputs":false,"full_cuda_graph":false,"pass_config":{},"max_capture_size":0,"local_cache_dir":null}
+[W921 23:16:20.236886961 ProcessGroupNCCL.cpp:941] Warning: TORCH_NCCL_AVOID_RECORD_STREAMS is the default now, this environment variable is thus deprecated. (function operator())
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+(EngineCore_0 pid=357) INFO 09-21 23:16:20 [parallel_state.py:1134] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+(EngineCore_0 pid=357) INFO 09-21 23:16:20 [topk_topp_sampler.py:58] Using FlashInfer for top-p & top-k sampling.
+(EngineCore_0 pid=357) INFO 09-21 23:16:20 [gpu_model_runner.py:1921] Starting to load model TinyLlama/TinyLlama-1.1B-Chat-v1.0...
+(EngineCore_0 pid=357) INFO 09-21 23:16:21 [gpu_model_runner.py:1953] Loading model from scratch...
+(EngineCore_0 pid=357) INFO 09-21 23:16:21 [cuda.py:328] Using Flash Attention backend on V1 engine.
+(EngineCore_0 pid=357) INFO 09-21 23:16:21 [weight_utils.py:304] Using model weights format ['*.safetensors']
+(EngineCore_0 pid=357) INFO 09-21 23:16:21 [weight_utils.py:362] No model.safetensors.index.json found in remote.
+Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00,  1.28it/s]
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00,  1.28it/s]
+(EngineCore_0 pid=357) 
+(EngineCore_0 pid=357) INFO 09-21 23:16:22 [default_loader.py:267] Loading weights took 0.85 seconds
+(EngineCore_0 pid=357) INFO 09-21 23:16:23 [gpu_model_runner.py:1975] Model loading took 2.0513 GiB and 1.521577 seconds
+(EngineCore_0 pid=357) INFO 09-21 23:16:24 [gpu_worker.py:276] Available KV cache memory: 101.47 GiB
+(EngineCore_0 pid=357) INFO 09-21 23:16:24 [kv_cache_utils.py:850] GPU KV cache size: 4,836,272 tokens
+(EngineCore_0 pid=357) INFO 09-21 23:16:24 [kv_cache_utils.py:854] Maximum concurrency for 2,048 tokens per request: 2361.46x
+(EngineCore_0 pid=357) INFO 09-21 23:16:26 [core.py:217] init engine (profile, create kv cache, warmup model) took 3.81 seconds
+(EngineCore_0 pid=357) INFO 09-21 23:16:27 [__init__.py:3643] Cudagraph is disabled under eager mode
+(APIServer pid=291) INFO 09-21 23:16:27 [loggers.py:142] Engine 000: vllm cache_config_info with initialization after num_gpu_blocks is: 302267
+(APIServer pid=291) INFO 09-21 23:16:27 [async_llm.py:166] Torch profiler disabled. AsyncLLM CPU traces will not be collected.
+(APIServer pid=291) INFO 09-21 23:16:28 [api_server.py:1680] Supported_tasks: ['generate']
+(APIServer pid=291) INFO 09-21 23:16:28 [api_server.py:1957] Starting vLLM API server 0 on http://0.0.0.0:8000
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:36] Available routes are:
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /openapi.json, Methods: HEAD, GET
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /docs, Methods: HEAD, GET
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /docs/oauth2-redirect, Methods: HEAD, GET
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /redoc, Methods: HEAD, GET
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /health, Methods: GET
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /load, Methods: GET
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /ping, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /ping, Methods: GET
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /tokenize, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /detokenize, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /v1/models, Methods: GET
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /version, Methods: GET
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /v1/responses, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /v1/responses/{response_id}, Methods: GET
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /v1/responses/{response_id}/cancel, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /v1/chat/completions, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /v1/completions, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /v1/embeddings, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /pooling, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /classify, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /score, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /v1/score, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /v1/audio/transcriptions, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /v1/audio/translations, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /rerank, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /v1/rerank, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /v2/rerank, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /scale_elastic_ep, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /is_scaling_elastic_ep, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /invocations, Methods: POST
+(APIServer pid=291) INFO 09-21 23:16:28 [launcher.py:44] Route: /metrics, Methods: GET
+(APIServer pid=291) INFO:     Started server process [291]
+(APIServer pid=291) INFO:     Waiting for application startup.
+(APIServer pid=291) INFO:     Application startup complete.
+```
+
+
 
 
 
