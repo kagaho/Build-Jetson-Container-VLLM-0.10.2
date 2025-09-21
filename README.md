@@ -2,10 +2,6 @@
 
 - Follow below the simplified and unofficial installation path to get vLLM 0.10.2 on Jetson using Dusty’s jetson-containers (which can build/pull an aarch64 image for JetPack).
 
-- We are using latest VLLM to run on Jetson Thor GTP-OSS 120B.
-
-  Reference:  https://huggingface.co/openai/gpt-oss-120b
-
 ```
 git clone https://github.com/dusty-nv/jetson-containers
 cd jetson-containers/
@@ -230,7 +226,7 @@ Loading safetensors checkpoint shards: 100% Completed | 4/4 [00:04<00:00,  1.22s
 ```
 
 
-#### Testing:
+#### Testing smaller model:
 
 ```bash
 curl http://localhost:8001/v1/completions \
