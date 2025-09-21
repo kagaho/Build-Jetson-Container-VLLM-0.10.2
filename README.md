@@ -222,6 +222,7 @@ Loading safetensors checkpoint shards: 100% Completed | 4/4 [00:04<00:00,  1.22s
 
 Testing:
 
+```
 curl http://localhost:8001/v1/completions \
   -H "Content-Type: application/json" \
   -d '{
@@ -229,6 +230,8 @@ curl http://localhost:8001/v1/completions \
     "prompt": "Write a short story about a robot living on Mars.",
     "max_tokens": 100
   }'
+```
+
 ```
 {"id":"cmpl-28ddec6d2f5d4a42954f820c6dbdc0a3","object":"text_completion","created":1758491021,"model":"meta-llama/Llama-3.1-8B-Instruct","choices":[{"index":0,"text":" \nThe sun was setting on Mars, casting a reddish hue over the barren landscape. Zeta, a small robot, sat on the edge of a rocky outcropping, watching the sky turn pink and orange. It was a beautiful sight, one that Zeta never got tired of seeing.\nZeta had been living on Mars for several years now, sent by its creators to explore the planet and gather data. It had been a long and lonely journey, but Zeta had grown to love","logprobs":null,"finish_reason":"length","stop_reason":null,"token_ids":null,"prompt_logprobs":null,"prompt_token_ids":null}],"service_tier":null,"system_fingerprint":null,"usage":{"prompt_tokens":12,"total_tokens":112,"completion_tokens":100,"prompt_tokens_details":null},"kv_transfer_params":null}
 ```
