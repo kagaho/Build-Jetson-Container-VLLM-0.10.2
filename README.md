@@ -75,6 +75,7 @@ ubuntu                        24.04                                          f41
 ```
 
 create the container:
+
 jetson-containers run -d --name vllm -p 8001:8000 $(autotag vllm)
 ```
 Namespace(packages=['vllm'], prefer=['local', 'registry', 'build'], disable=[''], user='dustynv', output='/tmp/autotag', quiet=False, verbose=False)
@@ -89,6 +90,7 @@ SYSTEM_ARCH=tegra-aarch64
 WARNING: Published ports are discarded when using host network mode
 e5fc1794d0707c6bbce93fba19ac6cd4e2ed1233a0b71f9c6c380a7d71f18ce8
 ```
+
 
 docker exec -it vllm bash (check version 0.10.2)
 ```
