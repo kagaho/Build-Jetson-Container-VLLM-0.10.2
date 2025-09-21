@@ -222,7 +222,7 @@ Loading safetensors checkpoint shards: 100% Completed | 4/4 [00:04<00:00,  1.22s
 
 Testing:
 
-```
+```bash
 curl http://localhost:8001/v1/completions \
   -H "Content-Type: application/json" \
   -d '{
@@ -237,7 +237,7 @@ curl http://localhost:8001/v1/completions \
 ```
 
 At the container:
-```
+```bash
 (EngineCore_0 pid=454) WARNING 09-21 21:43:43 [cudagraph_dispatcher.py:102] cudagraph dispatching keys are not initialized. No cudagraph will be used.
 (APIServer pid=387) INFO:     172.17.0.1:57744 - "POST /v1/completions HTTP/1.1" 200 OK
 (APIServer pid=387) INFO 09-21 21:43:53 [loggers.py:123] Engine 000: Avg prompt throughput: 1.2 tokens/s, Avg generation throughput: 10.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
