@@ -1,4 +1,4 @@
-## How to Build Jetson Conainer latest VLLM 0.10.2 on Jetson Thor 
+## How to Build Jetson Container on latest VLLM 0.10.2 on Jetson Thor 
 
 - Follow below the simplified and unofficial installation path to get vLLM 0.10.2 on Jetson using Dusty’s jetson-containers (which can build/pull an aarch64 image for JetPack).
 
